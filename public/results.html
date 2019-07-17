@@ -22,8 +22,6 @@
       $.get("/api/responses")
         .then(data=>{
           for(var i = 0; i < data.length; i++){
-            console.log(data[i].feeling)
-            console.log(data[i].category)
             if(feelingsCount.hasOwnProperty(data[i].feeling)){
               feelingsCount[`${data[i].feeling}`]+=1
             } else {
@@ -38,7 +36,14 @@
 
           console.log(feelingsCount)
           console.log(categoryCount)
-          feelingsArray=Object.values(object1)
+          feelingsValues=Object.values(feelingsCount)
+          feelingsLabel=Object.keys(feelingsCount)
+          categoryValues=Object.values(categoryCount)
+          categoryLabel=Object.keys(categoryCount)
+          console.log(feelingsLabel)
+          console.log(categoryLabel)
+          console.log(feelingsValue)
+          console.log(categoryValue)
         })
 
 
