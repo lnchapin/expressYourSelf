@@ -7,11 +7,12 @@ module.exports = function(app) {
   });
 
   app.get("/api/responses", function(req, res) {
-    res.send(responses)
+    res.send(response)
   });
 
   app.post("/api/response", function(req, res) {
-    console.log(req.body);
+    response.push(req.body);
+    res.send(true)
   });
 
 

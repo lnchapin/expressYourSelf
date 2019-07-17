@@ -8,9 +8,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <h1>Results Page</h1>
+    <h1>What are the stats like?</h1>
 
     <script type="text/javascript">
+      var feelingsCount={};
+      var categoryCount={};
+
+      var feelingsValue;
+      var feelingsLabel;
+      var categoryValue;
+      var categoryLabel;
+
+      $.get("/api/responses")
+        .then(data=>{
+          for(var i = 0; i < data.length; i++){
+            console.log(data[i].feeling)
+            console.log(data[i].category)
+            if(feelingsCount.hasOwnProperty(data[i].feeling)){
+              feelingsCount[`${data[i].feeling}`]+=1
+            } else {
+              feelingsCount[`${data[i].feeling}`] = 1
+            }
+            if(categoryCount.hasOwnProperty(data[i].category)){
+              categoryCount[`${data[i].category}`]+=1
+            }else{
+              categoryCount[`${data[i].category}`]=1
+            }
+          }
+
+          console.log(feelingsCount)
+          console.log(categoryCount)
+          feelingsArray=Object.values(object1)
+        })
+
 
     </script>
   </body>

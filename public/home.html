@@ -39,13 +39,18 @@
 
         $("#survey").on("submit", function(event){
           event.preventDefault();
-          var response = {
+          var userResponse = {
             name: $("#submitterName").val().trim(),
             feeling: $("#feelings :selected").attr("data-feeling"),
             category: $("#feelings :selected").attr("data-category")
           };
 
-          console.log(response);
+          $.post("/api/response", userResponse)
+          .then(data=>{
+            console.log(data)
+            window.location = "/results"
+          })
+
 
         })
 
