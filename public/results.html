@@ -8,19 +8,42 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
-  <body>
-    <h1>What are the stats like?</h1>
+  <body class="container">
+    <div class="row">
+      <h1>What are the stats like?</h1>
+    </div>
+    <div class="row">
+      <div class="col-6 text-center">
+        <h3>Feelings</h3>
+      </div>
+      <div class="col-6 text-center">
+        <h3>Category</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <canvas id="myChartFeelings"></canvas>
+      </div>
+      <div class="col-6">
+        <canvas id="myChartCategory"></canvas>
+      </div>
+    </div>
 
-    <h3>Feelings</h3>
-    <canvas id="myChartFeelings"></canvas>
 
-    <h3>Category</h3>
-    <canvas id="myChartCategory"></canvas>
 
     <script type="text/javascript">
       var feelingsCount={};
       var categoryCount={};
-
+      var colorArray = ['#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC',
+		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680',
+		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF', '#FF6633'];
       var feelingsValue;
       var feelingsLabel;
       var categoryValue;
@@ -44,12 +67,6 @@
           feelingsLabel=Object.keys(feelingsCount)
           categoryValues=Object.values(categoryCount)
           categoryLabel=Object.keys(categoryCount)
-          console.log(feelingsLabel)
-          console.log(categoryLabel)
-          console.log(feelingsValues)
-          console.log(categoryValues)
-
-
 
           var ctxFeelings = document.getElementById('myChartFeelings').getContext('2d');
           var chart = new Chart(ctxFeelings, {
@@ -60,15 +77,34 @@
               data: {
                   labels: feelingsLabel,
                   datasets: [{
-                      label: 'My First dataset',
-                      backgroundColor: 'rgb(255, 99, 132)',
-                      borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: colorArray,
+                    borderColor: colorArray,
                       data: feelingsValues
                   }]
               },
 
               // Configuration options go here
-              options: {}
+              options: {cutoutPercentage: 50}
+          });
+
+
+          var ctxCategory = document.getElementById('myChartCategory').getContext('2d');
+          var chart = new Chart(ctxCategory, {
+              // The type of chart we want to create
+              type: 'pie',
+
+              // The data for our dataset
+              data: {
+                  labels: categoryLabel,
+                  datasets: [{
+                    backgroundColor: colorArray,
+                    borderColor: colorArray,
+                      data: categoryValues
+                  }]
+              },
+
+              // Configuration options go here
+              options: {cutoutPercentage: 50}
           });
 
 
