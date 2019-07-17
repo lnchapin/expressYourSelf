@@ -14,6 +14,4 @@ module.exports = function(app) {
     response.push(req.body);
     res.send(true)
   });
-
-
 }
