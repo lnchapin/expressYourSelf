@@ -6,6 +6,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body class="container">
     <nav>
@@ -27,36 +28,6 @@
     </div>
 
 
-    <script type="text/javascript">
-      $.get("/api/feelings")
-        .then(data=>{
-          data.forEach(feeling=>{
-            var option = $("<option>")
-              option.attr("data-category", feeling.category)
-              option.attr("data-feeling", feeling.feeling)
-              option.text(feeling.feeling)
-              $("#feelings").append(option)
-          })
-        })
-
-        $("#survey").on("submit", function(event){
-          event.preventDefault();
-          var userResponse = {
-            name: $("#submitterName").val().trim(),
-            feeling: $("#feelings :selected").attr("data-feeling"),
-            category: $("#feelings :selected").attr("data-category")
-          };
-
-          $.post("/api/response", userResponse)
-          .then(data=>{
-            console.log(data)
-            window.location = "/results"
-          })
-
-
-        })
-
-
-    </script>
+    <script type="text/javascript" src="js/home.js"></script>
   </body>
 </html>
